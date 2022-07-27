@@ -87,7 +87,7 @@ def verify_proceed():
               f"Username => {username_entry.get()}\n" \
               f"Password => {password_entry.get()}\n\n"
     proceed = messagebox.askokcancel(
-        title="Verify",
+        title="Please Verify",
         message=display_message)
     return proceed
 
