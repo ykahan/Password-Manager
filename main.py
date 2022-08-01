@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from random import randint
+import json
 
 WINDOW_HEIGHT = 200
 WINDOW_WIDTH = 200
@@ -58,10 +59,27 @@ def save_or_cancel():
 
 def save_data(proceed):
     if proceed:
-        new_data = website_entry.get() + "\n" + username_entry.get() + "\n" + password_entry.get() + "\n\n"
-        with open("data.txt", "a") as file:
-            file.write(new_data)
+        website, username, password = get_data_fields()
+        new_data = get_data_dictionary(password, username, website)
+        with open("data.json", "w") as file:
+            json.dump(new_data, file)
         return True
+
+
+def get_data_dictionary(password, username, website):
+    return {website:
+        {
+            "username": username,
+            "password": password
+        }
+    }
+
+
+def get_data_fields():
+    website = website_entry.get()
+    username = username_entry.get()
+    password = password_entry.get()
+    return website, username, password
 
 
 def check_data():
@@ -98,7 +116,7 @@ def clear_fields():
 
 
 def website_entry_has_data():
-    if len(website_entry.get()) > 10:
+    if len(website_entry.get()) > 5:
         return True
     return False
 
