@@ -60,10 +60,25 @@ def save_or_cancel():
 def save_data(proceed):
     if proceed:
         website, username, password = get_data_fields()
-        new_data = get_data_dictionary(password, username, website)
-        with open("data.json", "w") as file:
-            json.dump(new_data, file)
-        return True
+        new_data_as_dictionary = get_data_dictionary(password, username, website)
+        try:
+            updated_data_as_dictionary = read_and_update_credentials(new_data_as_dictionary)
+        except FileNotFoundError:
+            add_credentials_to_json_file(new_data_as_dictionary)
+        else:
+            add_credentials_to_json_file(updated_data_as_dictionary)
+
+
+def read_and_update_credentials(new_data):
+    with open("credentials.json", "r") as file:
+        data = json.load(file)
+        data.update(new_data)
+    return data
+
+
+def add_credentials_to_json_file(new_data):
+    with open("credentials.json", "w") as file:
+        json.dump(new_data, file, indent=4)
 
 
 def get_data_dictionary(password, username, website):
