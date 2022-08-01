@@ -167,29 +167,33 @@ website_entry.config(width=35)
 website_entry.grid(sticky="w", row=1, column=1, columnspan=2)
 website_entry.focus()
 
+search_button = Button(window)
+search_button.config(width=40, text="Search For Website")
+search_button.grid(sticky="e", row=2, column=0, columnspan=3)
+
 username_label = Label(window)
 username_label.config(text="Email/Username")
-username_label.grid(row=2, column=0)
+username_label.grid(row=3, column=0)
 
 username_entry = Entry(window)
 username_entry.config(width=35)
-username_entry.grid(sticky="w", row=2, column=1, columnspan=2)
+username_entry.grid(sticky="w", row=3, column=1, columnspan=2)
 username_entry.insert(0, "yehoshua.kahan@gmail.com")
 
 password_label = Label(window)
 password_label.config(text="Password")
-password_label.grid(row=3, column=0, columnspan=1)
+password_label.grid(row=4, column=0, columnspan=1)
 
 password_entry = Entry(window)
 password_entry.config(width=35)
-password_entry.grid(sticky="w", row=3, column=1, columnspan=2)
+password_entry.grid(sticky="w", row=4, column=1, columnspan=2)
 
 password_button = Button(window)
 password_button.config(text="Generate Password", width=40, command=lambda: create_random_password())
-password_button.grid(sticky="e", row=4, column=0, columnspan=3)
+password_button.grid(sticky="e", row=5, column=0, columnspan=3)
 
 add_button = Button(window)
 add_button.config(text="Add To Database", width=40, command=lambda: save_or_cancel())
-add_button.grid(sticky="e", row=5, column=0, columnspan=3)
+add_button.grid(sticky="e", row=6, column=0, columnspan=3)
 
 window.mainloop()
